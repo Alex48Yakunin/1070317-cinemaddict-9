@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Alex Yakunin](https://up.htmlacademy.ru/ecmascript/9/user/1070317).
-* Наставник: `Неизвестно`.
+* Наставник: `Андрей Рыжаков`.
 
 ---
 
