@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require(`path`);
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, `public`),
-    publicPath: 'http://localhost:8080/',
+    publicPath: `http://localhost:8080/`,
     compress: true,
     watchContentBase: true
   }
