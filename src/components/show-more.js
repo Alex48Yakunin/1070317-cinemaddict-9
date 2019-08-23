@@ -1,5 +1,5 @@
 const showMore = () => {
-  return `<button class="films-list__show-more">Show more</button>`;
+  return `<button id="show-more" class="films-list__show-more">Show more</button>`;
 };
 
 export {
