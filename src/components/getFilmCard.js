@@ -24,7 +24,7 @@ const getFilmCard = () => ({
     `./images/posters/the-dance-of-life.jpg`,
     `./images/posters/the-great-flamarion.jpg`,
     `./images/posters/the-man-with-the-golden-arm.jpg`,
-  ],
+  ][Math.floor(Math.random() * 7)],
   description: [
     `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     `Cras aliquet varius magna, non porta ligula feugiat eget.`,
@@ -46,19 +46,27 @@ const getFilmCard = () => ({
     };
     return number(arrayRating);
   },
-  year: [`1925`, `2010`, `2015`, `1980`, `2005`],
-  genre: new Set([
+  year: [`1925`, `2010`, `2015`, `1980`, `2005`][Math.floor(Math.random() * 5)],
+  genres: new Set([
     `Musical`,
     `horrors`,
     `action`,
-    `fantasy`,
-    `catastrophe`,
   ]),
 
-
+  time() {
+    const measuredTime = new Date(null);
+    measuredTime.setSeconds(Math.random() * 12000);
+    const MHSTime = measuredTime.toISOString().substr(11, 8);
+    return MHSTime;
+  },
+  isWatchlist: Boolean(Math.round(Math.random())),
+  isHistory: Boolean(Math.round(Math.random())),
+  isFavorites: Boolean(Math.round(Math.random())),
+  comments() {
+    const count = Math.random() * 10;
+    return count.toFixed();
+  }
 });
 
 
-export {
-  getFilmCard
-};
+export {getFilmCard};

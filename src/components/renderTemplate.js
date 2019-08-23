@@ -1,28 +1,13 @@
-import {
-  search
-} from './search';
-import {
-  profile
-} from './profile';
-import {
-  mainNavigation
-} from './main-navigation';
+import {search} from './search';
+import {profile} from './profile';
+import {mainNavigation} from './main-navigation';
 // import {statistic} from './statistic';
-import {
-  sort
-} from './sort';
-import {
-  films
-} from './films';
-import {
-  filmCard
-} from './film-card';
-import {
-  filmDetails
-} from './film-Details';
-import {
-  showMore
-} from './show-more';
+import {sort} from './sort';
+import {films} from './films';
+import {filmCard} from './film-card';
+// import {filmDetails} from './film-Details';
+import {showMore} from './show-more';
+import {getFilmCard} from './getFilmCard';
 
 const renderTemplate = (container, node) => {
   const block = document.querySelector(container);
@@ -39,16 +24,16 @@ const render = () => {
   renderTemplate(`.main`, sort());
   renderTemplate(`.main`, films());
   for (let i = 0; i < 5; i++) {
-    renderTemplate(`.films-list .films-list__container`, filmCard());
+    renderTemplate(`.films-list .films-list__container`, filmCard(getFilmCard()));
   }
   for (let i = 0; i < 2; i++) {
-    renderTemplate(`.films-list--extra .films-list__container`, filmCard());
+    renderTemplate(`.films-list--extra .films-list__container`, filmCard(getFilmCard()));
   }
   for (let i = 0; i < 2; i++) {
-    renderTemplate(`.films-list--extra:last-of-type .films-list__container`, filmCard());
+    renderTemplate(`.films-list--extra:last-of-type .films-list__container`, filmCard(getFilmCard()));
   }
   renderTemplate(`.films-list`, showMore());
-  renderTemplate(`body`, filmDetails());
+  // renderTemplate(`body`, filmDetails());
 
 };
 
