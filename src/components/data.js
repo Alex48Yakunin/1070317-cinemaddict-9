@@ -1,4 +1,5 @@
 import {getFilmCard} from './getFilmCard';
+import {getComments} from './getComments';
 
 const dataFilm = [
   getFilmCard(),
@@ -13,4 +14,13 @@ const dataFilm = [
   getFilmCard(),
 ];
 
-export {dataFilm};
+
+const dataComments = [
+  getComments(),
+  getComments(),
+  getComments(),
+  getComments(),
+  getComments(),
+];
+
+export {dataFilm, dataComments};

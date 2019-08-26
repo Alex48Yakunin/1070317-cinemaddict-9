@@ -12,6 +12,9 @@ import {getFilmCard} from './getFilmCard';
 import {dataFilm} from './data';
 import {getFilter} from './getFilter';
 import {dataFilmDetails} from './dataFilmDetails';
+import {getComments} from './getComments';
+import {comment} from './comments';
+import {dataComments} from './data';
 
 const renderTemplate = (container, node) => {
   const block = document.querySelector(container);
@@ -50,7 +53,14 @@ const render = () => {
     renderTemplate(`.films-list--extra:last-of-type .films-list__container`, filmCard(getFilmCard()));
   }
   renderTemplate(`.films-list`, showMore());
-  renderTemplate(`body`, filmDetails(dataFilmDetails()));
+  renderTemplate(`body`, filmDetails(dataFilmDetails(), getComments()));
+
+  for (let value in dataComments) {
+    if (value <= dataComments.length) {
+      renderTemplate(`.film-details__comments-wrap`, comment(getComments()));
+    }
+  }
+
 
 };
 
