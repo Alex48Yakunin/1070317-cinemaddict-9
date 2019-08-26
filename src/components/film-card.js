@@ -10,7 +10,7 @@ const filmCard = (data) => {
   </span>`).join(``)}
   </p>
   <img src="${data.img}" alt="" class="film-card__poster">
-  <p class="film-card__description">${data.description.slice(Math.random() * 9, Math.random() * 9).join(``)}</p>
+  <p class="film-card__description">${data.description.slice(1, Math.random() * 9).join(``)}</p>
   <a class="film-card__comments">${data.comments()} comments</a>
   <form class="film-card__controls">
     <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>

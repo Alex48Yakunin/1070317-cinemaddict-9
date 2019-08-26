@@ -6,11 +6,12 @@ import {mainNavigation} from './main-navigation';
 import {sort} from './sort';
 import {films} from './films';
 import {filmCard} from './film-card';
-// import {filmDetails} from './film-Details';
+import {filmDetails} from './film-Details';
 import {showMore} from './show-more';
 import {getFilmCard} from './getFilmCard';
 import {dataFilm} from './data';
 import {getFilter} from './getFilter';
+import {dataFilmDetails} from './dataFilmDetails';
 
 const renderTemplate = (container, node) => {
   const block = document.querySelector(container);
@@ -21,7 +22,7 @@ const renderTemplate = (container, node) => {
 
 const render = () => {
   renderTemplate(`.header`, search());
-  renderTemplate(`.header`, profile());
+  renderTemplate(`.header`, profile(getFilter));
   renderTemplate(`.main`, mainNavigation(getFilter));
   renderTemplate(`.main`, sort());
   renderTemplate(`.main`, films());
@@ -49,10 +50,8 @@ const render = () => {
     renderTemplate(`.films-list--extra:last-of-type .films-list__container`, filmCard(getFilmCard()));
   }
   renderTemplate(`.films-list`, showMore());
-  // renderTemplate(`body`, filmDetails());
+  renderTemplate(`body`, filmDetails(dataFilmDetails()));
 
 };
 
-export {
-  render as renderTemplate
-};
+export {render as renderTemplate};
