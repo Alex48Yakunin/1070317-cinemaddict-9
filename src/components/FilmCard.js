@@ -1,6 +1,6 @@
 import {createElement} from './utils';
 
-class filmCard {
+class  FilmCard {
   constructor({
     title,
     img,
@@ -11,15 +11,15 @@ class filmCard {
     isHistory,
     isFavorites
   }) {
-    this.title = title;
-    this.genres = genres;
-    this.img = img;
-    this.description = description;
+    this._title = title;
+    this._genres = genres;
+    this._img = img;
+    this._description = description;
     this._element = null;
-    this.year = year;
-    this.isWatchlist = isWatchlist;
-    this.isHistory = isHistory;
-    this.isFavorites = isFavorites;
+    this._year = year;
+    this._isWatchlist = isWatchlist;
+    this._isHistory = isHistory;
+    this._isFavorites = isFavorites;
   }
   getElement() {
     if (!this._element) {
@@ -44,19 +44,23 @@ class filmCard {
     const MHSTime = measuredTime.toISOString().substr(11, 8);
     return MHSTime;
   }
+  comments() {
+    const count = Math.random() * 10;
+    return count.toFixed();
+  }
   getTemplate() {
     return `<article class="film-card">
-    <h3 class="film-card__title">${this.title}</h3>
+    <h3 class="film-card__title">${this._title}</h3>
     <p class="film-card__rating">${this.rating().toFixed(1)}</p>
     <p class="film-card__info">
-      <span class="film-card__year">${this.year}</span>
+      <span class="film-card__year">${this._year}</span>
       <span class="film-card__duration">${this.time()}</span>
-      ${Array.from(this.genres).map((genre) => `<span class="film-card__genre">
-        ${genre}
-    </span>`).join(``)}
+      ${(Array.from(this._genres).map((ganre) => (`
+      <span class="film-card__genre">${ganre}</span>`.trim()
+      ))).join(``)} 
     </p>
-    <img src="${this.img}" alt="" class="film-card__poster">
-    <p class="film-card__description">${this.description.slice(1, Math.random() * 9).join(``)}</p>
+    <img src="${this._img}" alt="" class="film-card__poster">
+    <p class="film-card__description">${this._description}</p>
     <a class="film-card__comments">${this.comments()} comments</a>
     <form class="film-card__controls">
       <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist">Add to watchlist</button>
@@ -67,4 +71,4 @@ class filmCard {
   }
 }
 
-export {filmCard};
+export {FilmCard};

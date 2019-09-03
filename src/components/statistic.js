@@ -47,6 +47,5 @@ const statistic = () => {
 </section>`;
 };
 
-export {
-  statistic
-};
+export {statistic};
+
