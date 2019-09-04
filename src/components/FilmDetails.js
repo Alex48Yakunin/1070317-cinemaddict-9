@@ -1,4 +1,6 @@
 import {createElement} from './utils';
+import {Comment} from '../components/comments';
+import {getComments} from '../components/data';
 
 class FilmDetails {
   constructor({
@@ -11,7 +13,7 @@ class FilmDetails {
     writers,
     country,
     actors,
-    genres
+    genres,
   }) {
     this._title = title;
     this._img = img;
@@ -48,6 +50,7 @@ class FilmDetails {
 
     return this._element;
   }
+
   getTemplate() {
     return `<section class="film-details">
     <form class="film-details__inner" action="" method="get">
@@ -126,6 +129,7 @@ class FilmDetails {
       <div class="form-details__bottom-container">
         <section class="film-details__comments-wrap">
           <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count"></span></h3>
+
           <div class="film-details__new-comment">
             <div for="add-emoji" class="film-details__add-emoji-label"></div>
   

@@ -7,4 +7,3 @@ const sort = () => {
 };
 
 export {sort};
-

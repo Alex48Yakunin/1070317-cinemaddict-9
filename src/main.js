@@ -1,16 +1,15 @@
 import {FilmCard} from './components/FilmCard';
-import {Comment} from './components/Comments';
-import {getComments} from './components/data';
-import {getFilmCard} from './components/data';
-import {getFilmDetails} from './components/data';
 import {FilmDetails} from './components/FilmDetails';
+// import {Comment} from './components/comments';
+// import {getComments} from './components/data';
+import {getFilmCard} from './components/data';
 import {films} from './components/films';
 import {mainNavigation} from './components/mainNavigation';
 import {profile} from './components/profile';
 import {search} from './components/search';
 import {showMore} from './components/showMore';
 import {sort} from './components/sort';
-import {statistic} from './components/statistic';
+// import {statistic} from './components/statistic';
 import {Position, render, createElement} from './components/utils';
 
 
@@ -24,6 +23,7 @@ const filmMocks = new Array(FILM_COUNT)
 const filmMocksExtra = new Array(FILM_COUNT_EXTRA)
   .fill(``)
   .map(getFilmCard);
+
 
 const headerContainer = document.querySelector(`.header`);
 const siteMainContainer = document.querySelector(`.main`);
@@ -59,17 +59,16 @@ const ListContainer = document.querySelector(`.films-list`);
 
 
 const renderFilmCard = (filmMock) => {
-    const filmCard = new FilmCard(filmMock);
-    const filmDetail = new FilmDetails(filmMock);
+  const filmCard = new FilmCard(filmMock);
+  const filmDetail = new FilmDetails(filmMock);
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      filmListContainer.replaceChild(filmCard.getElement(), filmDetail.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
 
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
-        filmListContainer.replaceChild(filmCard.getElement(), filmDetail.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
-
-    filmCard.getElement()
+  filmCard.getElement()
       .querySelector(`.film-card__comments`)
       .addEventListener(`click`, () => {
         filmListContainer.replaceChild(filmDetail.getElement(), filmCard.getElement());
@@ -77,28 +76,28 @@ const renderFilmCard = (filmMock) => {
       });
 
 
-    filmDetail.getElement()
+  filmDetail.getElement()
       .querySelector(`.film-details__close-btn`)
       .addEventListener(`click`, () => {
         filmListContainer.replaceChild(filmCard.getElement(), filmDetail.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
-
-      render(filmListContainer, filmCard.getElement(), Position.BEFOREEND);
-}
+  // commentsMocks.forEach((commentItem)=> commentItem.getElement());
+  render(filmListContainer, filmCard.getElement(), Position.BEFOREEND);
+};
 
 const renderFilmCardExtraFirst = (filmMockE) => {
-    const filmCard = new FilmCard(filmMockE);
-    const filmDetail = new FilmDetails(filmMockE);
+  const filmCard = new FilmCard(filmMockE);
+  const filmDetail = new FilmDetails(filmMockE);
 
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
-        filmListContainerExtraFirst.replaceChild(filmCard.getElement(), filmDetail.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      filmListContainerExtraFirst.replaceChild(filmCard.getElement(), filmDetail.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
 
-    filmCard.getElement()
+  filmCard.getElement()
       .querySelector(`.film-card__comments`)
       .addEventListener(`click`, () => {
         filmListContainerExtraFirst.replaceChild(filmDetail.getElement(), filmCard.getElement());
@@ -106,27 +105,27 @@ const renderFilmCardExtraFirst = (filmMockE) => {
       });
 
 
-    filmDetail.getElement()
+  filmDetail.getElement()
       .querySelector(`.film-details__close-btn`)
       .addEventListener(`click`, () => {
         filmListContainerExtraFirst.replaceChild(filmCard.getElement(), filmDetail.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
 
-      render(filmListContainerExtraFirst, filmCard.getElement(), Position.BEFOREEND);
-}
+  render(filmListContainerExtraFirst, filmCard.getElement(), Position.BEFOREEND);
+};
 const renderFilmCardExtraLast = (filmMockE) => {
-    const filmCard = new FilmCard(filmMockE);
-    const filmDetail = new FilmDetails(filmMockE);
+  const filmCard = new FilmCard(filmMockE);
+  const filmDetail = new FilmDetails(filmMockE);
 
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
-        filmListContainerExtraLast.replaceChild(filmCard.getElement(), filmDetail.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      filmListContainerExtraLast.replaceChild(filmCard.getElement(), filmDetail.getElement());
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
 
-    filmCard.getElement()
+  filmCard.getElement()
       .querySelector(`.film-card__comments`)
       .addEventListener(`click`, () => {
         filmListContainerExtraLast.replaceChild(filmDetail.getElement(), filmCard.getElement());
@@ -134,15 +133,15 @@ const renderFilmCardExtraLast = (filmMockE) => {
       });
 
 
-    filmDetail.getElement()
+  filmDetail.getElement()
       .querySelector(`.film-details__close-btn`)
       .addEventListener(`click`, () => {
         filmListContainerExtraLast.replaceChild(filmCard.getElement(), filmDetail.getElement());
         document.removeEventListener(`keydown`, onEscKeyDown);
       });
 
-      render(filmListContainerExtraLast, filmCard.getElement(), Position.BEFOREEND);
-}
+  render(filmListContainerExtraLast, filmCard.getElement(), Position.BEFOREEND);
+};
 
 filmMocks.forEach((filmMock) => renderFilmCard(filmMock));
 filmMocksExtra.forEach((filmMockE) => renderFilmCardExtraFirst(filmMockE));
@@ -150,8 +149,7 @@ filmMocksExtra.forEach((filmMockE) => renderFilmCardExtraLast(filmMockE));
 
 
 const renderShowMore = () => {
-    render(ListContainer, createElement(showMore()), Position.BEFOREEND);
-  };
+  render(ListContainer, createElement(showMore()), Position.BEFOREEND);
+};
 
 renderShowMore();
-
