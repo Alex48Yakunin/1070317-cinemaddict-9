@@ -56,7 +56,6 @@ const getFilmCard = () => ({
     };
     return number(arrayRating);
   },
-  year: [`1925`, `2010`, `2015`, `1980`, `2005`][Math.floor(Math.random() * 5)],
   genres: new Set([
     `Musical`,
     `horrors`,

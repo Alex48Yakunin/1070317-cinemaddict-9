@@ -1,6 +1,6 @@
 import {createElement} from './utils';
-import {Comment} from '../components/comments';
-import {getComments} from '../components/data';
+// import {Comment} from '../components/comments';
+// import {getComments} from '../components/data';
 
 class FilmDetails {
   constructor({
