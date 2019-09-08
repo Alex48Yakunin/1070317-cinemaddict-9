@@ -1,17 +1,18 @@
 import {createElement} from './utils';
+// import {getComments} from '../components/data';
 
 class Comment {
   constructor({
-    img,
-    text,
-    author,
-    date
+    imgComment,
+    textComment,
+    authorComment,
+    dateComment
   }) {
-    this._img = img;
-    this._element = null;
-    this._text = text;
-    this._author = author;
-    this._date = new Date(date);
+    this._imgComment = imgComment;
+    this._elementComment = null;
+    this._textComment = textComment;
+    this._authorComment = authorComment;
+    this._dateComment = new Date(dateComment);
   }
   getElement() {
     if (!this._element) {
@@ -25,13 +26,13 @@ class Comment {
     <ul class="film-details__comments-list">
     <li class="film-details__comment">
       <span class="film-details__comment-emoji">
-        <img src="${this._img}" width="55" height="55" alt="emoji">
+        <img src="${this._imgComment}" width="55" height="55" alt="emoji">
       </span>
       <div>
-        <p class="film-details__comment-text">${this._text}</p>
+        <p class="film-details__comment-text">${this._textComment}</p>
         <p class="film-details__comment-info">
-          <span class="film-details__comment-author">${this._author}</span>
-          <span class="film-details__comment-day">${this._date.toDateString()}</span>
+          <span class="film-details__comment-author">${this._authorComment}</span>
+          <span class="film-details__comment-day">${this._dateComment.toDateString()}</span>
           <button class="film-details__comment-delete">Delete</button>
         </p>
       </div>

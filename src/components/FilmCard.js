@@ -57,7 +57,7 @@ class FilmCard {
       <span class="film-card__duration">${this.time()}</span>
       ${(Array.from(this._genres).map((ganre) => (`
       <span class="film-card__genre">${ganre}</span>`.trim()
-  ))).join(``)} 
+  ))).join(``)}
     </p>
     <img src="${this._img}" alt="" class="film-card__poster">
     <p class="film-card__description">${this._description}</p>
