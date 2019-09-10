@@ -6,6 +6,4 @@ const sort = () => {
 </ul>`;
 };
 
-export {
-  sort
-};
+export {sort};
