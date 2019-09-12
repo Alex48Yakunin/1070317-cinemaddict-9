@@ -1,6 +1,6 @@
-import {createElement} from './utils';
+import {AbstractComponent} from './AbstractComponent';
 
-class FilmCard {
+class FilmCard extends AbstractComponent {
   constructor({
     title,
     img,
@@ -11,23 +11,17 @@ class FilmCard {
     isHistory,
     isFavorites
   }) {
+    super();
     this._title = title;
     this._genres = genres;
     this._img = img;
     this._description = description;
-    this._element = null;
     this._year = year;
     this._isWatchlist = isWatchlist;
     this._isHistory = isHistory;
     this._isFavorites = isFavorites;
   }
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
 
-    return this._element;
-  }
   rating() {
     const arrayRating = Array.from({
       length: 40
