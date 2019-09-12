@@ -1,8 +1,8 @@
-import {createElement} from './utils';
+import {AbstractComponent} from './AbstractComponent';
 import {Comment} from '../components/comments';
 import {getComments} from '../components/data';
 
-class FilmDetails {
+class FilmDetails extends AbstractComponent {
   constructor({
     title,
     img,
@@ -15,6 +15,7 @@ class FilmDetails {
     actors,
     genres,
   }) {
+    super();
     this._title = title;
     this._img = img;
     this._description = description;
@@ -25,7 +26,6 @@ class FilmDetails {
     this._country = country;
     this._actors = actors;
     this._genres = genres;
-    this._element = null;
     this._comment = new Comment(getComments());
   }
   rating() {
@@ -44,14 +44,6 @@ class FilmDetails {
     const MHSTime = measuredTime.toISOString().substr(11, 8);
     return MHSTime;
   }
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
   getTemplate() {
     return `<section class="film-details">
     <form class="film-details__inner" action="" method="get">

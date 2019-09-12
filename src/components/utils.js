@@ -27,4 +27,9 @@ const unrender = (element) => {
   }
 };
 
-export {Position, createElement, render, unrender};
+const Key = {
+  ESCAPE_IE: `Escape`,
+  ESCAPE: `Esc`,
+};
+
+export {Position, createElement, render, unrender, Key};
