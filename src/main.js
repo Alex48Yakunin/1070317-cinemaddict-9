@@ -39,13 +39,10 @@ const renderMainNavigation = () => {
 const renderFilms = () => {
   render(siteMainContainer, createElement(films()), Position.BEFOREEND);
 };
-
-
 renderSearch();
 renderProfile();
 renderMainNavigation();
 renderFilms();
-
 const filmContainer = siteMainContainer.querySelector(`.films`);
 
 const renderFilmList = () => {
