@@ -47,24 +47,35 @@ renderMainNavigation();
 renderFilms();
 
 const filmContainer = siteMainContainer.querySelector(`.films`);
+
 const renderFilmList = () => {
   render(filmContainer, createElement(new FilmsList().getTemplate()), Position.AFTERBEGIN);
 };
 renderFilmList();
 
-const filmListCont = siteMainContainer.querySelector(`.films-list`);
+const filmListCont = filmContainer.querySelector(`.films-list`);
 const renderFilmListContainer = () => {
   render(filmListCont, createElement(new FilmsListContainer().getTemplate()), Position.AFTERBEGIN);
 };
 renderFilmListContainer();
 
 const filmListContainer = document.querySelector(`.films-list__container`);
-const filmListContainerExtraFirst = document.querySelector(`.films-list--extra_top .films-list__container`);
-const filmListContainerExtraLast = document.querySelector(`.films-list--extra_most .films-list__container`);
-const ListContainer = document.querySelector(`.films-list`);
+let filmListContainerExtraFirst = document.querySelector(`.films-list--extra_top`);
+let filmListContainerExtraLast = document.querySelector(`.films-list--extra_most`);
+
+const renderFilmListContainerTop = () => {
+  render(filmListContainerExtraFirst, createElement(new FilmsListContainer().getTemplate()), Position.BEFOREEND);
+};
+const renderFilmListContainerMost = () => {
+  render(filmListContainerExtraLast, createElement(new FilmsListContainer().getTemplate()), Position.BEFOREEND);
+};
+renderFilmListContainerTop();
+renderFilmListContainerMost();
 
 const filmsController = new PageController(filmListContainer, filmMocks);
 filmsController.init();
+filmListContainerExtraFirst = document.querySelector(`.films-list--extra_top .films-list__container`);
+filmListContainerExtraLast = document.querySelector(`.films-list--extra_most .films-list__container`);
 
 const renderFilmCardExtraFirst = (filmMockE) => {
   const filmCard = new FilmCard(filmMockE);
@@ -128,7 +139,7 @@ filmMocksExtra.forEach((filmMockE) => renderFilmCardExtraLast(filmMockE));
 
 
 const renderShowMore = () => {
-  render(ListContainer, createElement(showMore()), Position.BEFOREEND);
+  render(filmListCont, createElement(showMore()), Position.BEFOREEND);
 };
 
 renderShowMore();

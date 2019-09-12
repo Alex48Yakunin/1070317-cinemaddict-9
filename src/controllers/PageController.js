@@ -19,7 +19,7 @@ class PageController {
     render(this._FilmsList.getElement(), this._sort.getElement(), Position.AFTERBEGIN);
     render(this._FilmsList.getElement(), this._filmsListContainer.getElement(), Position.BEFOREEND);
 
-    this._filmsCard.forEach((filmsMock) => this._renderTask(filmsMock));
+    this._filmsCard.forEach((filmsMock) => this._renderFilms(filmsMock));
 
     this._sort.getElement()
       .addEventListener(`click`, (evt) => this._onSortLinkClick(evt));
