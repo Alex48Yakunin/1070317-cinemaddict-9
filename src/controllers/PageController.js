@@ -33,7 +33,6 @@ class PageController {
 
   _renderFilm() {
     unrender(this._filmsListContainer.getElement());
-
     this._filmsListContainer.removeElement();
     render(this._FilmsList.getElement(), this._filmsListContainer.getElement(), Position.BEFOREEND);
     this._filmsCard.forEach((filmsMock) => this._renderFilms(filmsMock));
