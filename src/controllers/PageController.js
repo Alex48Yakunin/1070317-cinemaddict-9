@@ -1,67 +1,60 @@
 import {FilmsList} from '../components/FilmsList';
 import {Sort} from '../components/Sort';
 import {FilmsListContainer} from '../components/FilmsListContainer';
-import {FilmCard} from '../components/FilmCard';
-import {FilmDetails} from '../components/FilmDetails';
-import {Position, render, Key} from '../components/utils';
-
+import {ShowMore} from '../components/ShowMore';
+import {Position, render, unrender} from '../components/utils';
+import {MovieController} from './MovieController';
 
 class PageController {
   constructor(container, filmsCard) {
     this._container = container;
     this._filmsCard = filmsCard;
     this._FilmsList = new FilmsList();
+    this._ShowMore = new ShowMore();
     this._sort = new Sort();
     this._filmsListContainer = new FilmsListContainer();
+
+    this._subscriptions = [];
+    this._onChangeView = this._onChangeView.bind(this);
+    this._onDataChange = this._onDataChange.bind(this);
+
   }
   init() {
-    render(this._container, this._FilmsList.getElement(), Position.BEFOREEND);
+    render(this._container, this._FilmsList.getElement(), Position.AFTERBEGIN);
     render(this._FilmsList.getElement(), this._sort.getElement(), Position.AFTERBEGIN);
     render(this._FilmsList.getElement(), this._filmsListContainer.getElement(), Position.BEFOREEND);
+    render(this._FilmsList.getElement(), this._ShowMore.getElement(), Position.BEFOREEND);
 
     this._filmsCard.forEach((filmsMock) => this._renderFilms(filmsMock));
 
     this._sort.getElement()
       .addEventListener(`click`, (evt) => this._onSortLinkClick(evt));
   }
-  _renderFilms(film) {
-    const filmComponent = new FilmCard(film);
-    const filmDetailComponent = new FilmDetails(film);
 
-    const onEscKeyDown = (evt) => {
-      if (evt.key === Key.ESCAPE || evt.key === Key.ESCAPE_IE) {
-        this._filmsListContainer.getElement().replaceChild(filmComponent.getElement(), filmDetailComponent.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      }
-    };
+  _renderFilm() {
+    unrender(this._filmsListContainer.getElement());
 
-    filmComponent.getElement()
-      .querySelector(`.film-card__comments`)
-      .addEventListener(`click`, () => {
-        this._filmsListContainer.getElement().replaceChild(filmDetailComponent.getElement(), filmComponent.getElement());
-        document.addEventListener(`keydown`, onEscKeyDown);
-      });
-
-    filmDetailComponent.getElement().querySelector(`textarea`)
-      .addEventListener(`focus`, () => {
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      });
-
-    filmDetailComponent.getElement().querySelector(`textarea`)
-      .addEventListener(`blur`, () => {
-        document.addEventListener(`keydown`, onEscKeyDown);
-      });
-
-    filmDetailComponent.getElement()
-      .querySelector(`.film-details__close-btn`)
-      .addEventListener(`click`, (evt) => {
-        evt.preventDefault();
-        this._filmsListContainer.getElement().replaceChild(filmComponent.getElement(), filmDetailComponent.getElement());
-        document.removeEventListener(`keydown`, onEscKeyDown);
-      });
-
-    render(this._filmsListContainer.getElement(), filmComponent.getElement(), Position.BEFOREEND);
+    this._filmsListContainer.removeElement();
+    render(this._FilmsList.getElement(), this._filmsListContainer.getElement(), Position.BEFOREEND);
+    this._filmsCard.forEach((filmsMock) => this._renderFilms(filmsMock));
   }
+
+  _onChangeView() {
+    this._subscriptions.forEach((it) => it());
+  }
+
+  _renderFilms(film) {
+    const movieController = new MovieController(this._filmsListContainer, film, this._onChangeView, this._onDataChange);
+    this._subscriptions.push(movieController.setDefaultView.bind(movieController));
+  }
+
+  _onDataChange(newData, oldData) {
+    this._filmsCard[this._filmsCard.findIndex((it2) => it2 === oldData)] = newData;
+
+    this._renderFilm(this._filmsCard);
+
+  }
+
   _onSortLinkClick(evt) {
     evt.preventDefault();
 
